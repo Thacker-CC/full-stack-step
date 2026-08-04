@@ -1,0 +1,9 @@
+# html css js放行
+!*.html
+!*.css
+!*.js
+
+# agent文件
+.codex/
+AGENTS.md
+.CLAUDE.md
