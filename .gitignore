@@ -1,13 +1,19 @@
-# html css js放行
-!*.html
-!*.css
-!*.js
+# dependencies
+node_modules/
 
-# agent文件
-.codex/
-AGENTS.md
-.CLAUDE.md
+# next.js
+.next/
+out/
 
-# build
-node_modules
-dist
+# production
+build/
+dist/
+
+# editor
+.vscode/*
+!.vscode/extensions.json
+
+# misc
+.DS_Store
+*.log
+.env*

@@ -1,53 +1,43 @@
-## AI全栈产品部署流程
+# zero-to-tech-4-5 · Next.js 版（模块 4.5 配套代码）
 
-### 终端与linux
----
+4.5 的终点成品：把 4.4 的 React 项目整体搬到 Next.js。网站长相不变；变的是路由层（手搓 `useRoute` → 文件夹路由）和入口（`index.html` + `main.jsx` + `App.jsx` → `app/`）。
 
-1. 终端linux常用指令
-    - mkdir     创建目录
-    - rm        删除
-    - touch     创建文件
-    - cat       查看文件
-    - cd        到某个目录下
-    - ls        查看目录中的文件
-2. 目录指引
-    - .         当前目录
-    - ~         家目录
-    - /         根目录
-3. vim编辑器
-    - esc       切换到普通模式
-    - i/a       从普通模式切换到输入模式
-    - :         从普通模式输出指令
+## 跑起来
 
-### 互联网如何工作
----
+```bash
+npm install
+npm run dev          # http://localhost:3000   （Next 默认端口是 3000）
+```
 
-1. 网页
-    - HTML用于描述网页的结构和布局关系。
-    - HTML配合CSS和JS等共同构造多个网页的交互关系。
-2. 服务器：通过放在公网服务器上供其他人访问。
-3. IP地址
-    - 访问服务器上的网站必须要公网IP
-    - IPv4和IPv6都可以。
-    - IPv4 例：148.24.3.22
-4. 域名：绑定IP，更方便记忆与访问，例：www.google.com
-5. DNS：IP与域名绑定的表存在所在，通过访问DNS才知道某域名对应哪个IP
-6. 端口
-    - 22        http的端口
-    - 443       https的端口
-    - 一个服务器有多个程序，都有自己的窗口，用于区分访问的服务程序
+## 把你的 4.4 项目（`zero-to-tech`）迁成这样：整包替换
 
-### SSH和Nginx
----
+1. 把 `~/zero-to-tech` 里**除隐藏的 `.git` 外的所有文件删掉**。
+2. 把本 demo 下的所有文件拷进去（`node_modules`、`.next` 不用拷）。
+3. 跑起来确认还是那个网站：
+   ```bash
+   npm install
+   npm run dev          # http://localhost:3000
+   ```
+4. 确认无误后 `git add` / `commit` / `push`。
 
-    1. SSH
-        - ssh用于远程连接登录服务器
-        - ssh-keygen -t ed25519 -C "<你的邮箱地址，可以乱填>"
-        - 公钥放服务器。
-    2. Nginx
-        - /etc/nginx 中有Nginx的配置信息
-        - `sites-available`目录中有网站的配置
-        - `sites-enabled`目录中存放启用的配置软连接
-    3. 通过Http默认22端口或者https默认443端口访问
+## 项目结构
 
+```
+app/                     ← 文件夹 = 路由
+  layout.jsx             ← 全站外壳（页面包裹 + import 8 个 css）
+  page.jsx               ← /         → 渲染 <HomeView />
+  text-lab/page.jsx      ← /text-lab → 渲染 <TextLabView />
+components/
+  Nav.jsx                ← <Link> + usePathname（"use client"）
+  HomeView.jsx           ← 4.4 的 HomePage 改名
+  TextLabView.jsx        ← 4.4 的 TextLabPage 改名
+  PageHeading.jsx        ← 同 4.4
+  InputCard.jsx          ← 同 4.4（"use client"）
+  ResultCard.jsx         ← 同 4.4（"use client"）
+  AnimatedCardGrid.jsx   ← 同 4.4（"use client"）
+css/                     ← 8 个 css，同 4.4
+data/site.js             ← 同 4.4
+next.config.mjs          ← 空 {}
+```
 
+相比 4.4，没了 `index.html`、`src/main.jsx`、`src/App.jsx`、`src/router/useRoute.js`——这一坨被 `app/` 取代了。
