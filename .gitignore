@@ -7,3 +7,7 @@
 .codex/
 AGENTS.md
 .CLAUDE.md
+
+# build
+node_modules
+dist
